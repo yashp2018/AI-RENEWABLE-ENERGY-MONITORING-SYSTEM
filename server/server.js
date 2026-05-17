@@ -12,13 +12,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: [
-    'https://solar-simulator-ui.onrender.com',
-    'https://solar-dashboard.onrender.com',
-    'http://localhost:8080',
-    'http://localhost:5173',
-  ],
+  origin: true,   // allow all origins — lock down after confirming URLs
   methods: ['GET', 'POST'],
+  credentials: true,
 }));
 app.use(express.json());
 
