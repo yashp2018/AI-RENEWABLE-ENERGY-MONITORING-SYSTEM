@@ -145,7 +145,7 @@ export interface ApiState {
 }
 
 const MAX_POINTS = 30;
-const BASE_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:5000/api";
+const BASE_URL = ((import.meta.env.VITE_API_URL as string) || "http://localhost:5000/api").replace(/\/$/, "");
 
 async function safeFetch<T>(url: string): Promise<T | null> {
   try {
