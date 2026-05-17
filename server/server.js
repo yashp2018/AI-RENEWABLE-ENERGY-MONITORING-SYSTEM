@@ -26,6 +26,11 @@ app.use((req, _res, next) => {
   next();
 });
 
+// Root health check — confirms server is alive on Render
+app.get('/', (_req, res) => {
+  res.json({ status: 'ok', message: 'AI Renewable Energy Backend is running' });
+});
+
 app.use('/api/data', dataRoutes);
 app.use('/api', systemRoutes);
 app.use('/api', intelligenceRoutes);
