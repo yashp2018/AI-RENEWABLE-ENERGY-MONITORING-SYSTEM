@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    --background: 222 25% 6%;
+    --foreground: 210 20% 92%;
+
+    --card: 222 22% 9%;
+    --card-foreground: 210 20% 92%;
+
+    --popover: 222 22% 9%;
+    --popover-foreground: 210 20% 92%;
+
+    --primary: 160 84% 39%;
+    --primary-foreground: 222 25% 6%;
+
+    --secondary: 222 18% 14%;
+    --secondary-foreground: 210 20% 80%;
+
+    --muted: 222 16% 12%;
+    --muted-foreground: 215 14% 48%;
+
+    --accent: 190 80% 45%;
+    --accent-foreground: 222 25% 6%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --warning: 45 93% 47%;
+    --warning-foreground: 222 25% 6%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 222 25% 6%;
+
+    --border: 222 16% 16%;
+    --input: 222 16% 16%;
+    --ring: 160 84% 39%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 222 22% 9%;
+    --sidebar-foreground: 210 20% 92%;
+    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary-foreground: 222 25% 6%;
+    --sidebar-accent: 222 18% 14%;
+    --sidebar-accent-foreground: 210 20% 80%;
+    --sidebar-border: 222 16% 16%;
+    --sidebar-ring: 160 84% 39%;
+
+    --glow-primary:     0 0 24px hsl(160 84% 39% / 0.35);
+    --glow-accent:      0 0 24px hsl(190 80% 45% / 0.35);
+    --glow-warning:     0 0 24px hsl(45 93% 47% / 0.35);
+    --glow-destructive: 0 0 24px hsl(0 72% 51% / 0.35);
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, hsl(160 84% 39% / 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, hsl(190 80% 45% / 0.04) 0%, transparent 60%);
+  }
+
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+}
+
+@layer components {
+  /* Glow effects */
+  .glow-primary     { box-shadow: var(--glow-primary); }
+  .glow-accent      { box-shadow: var(--glow-accent); }
+  .glow-warning     { box-shadow: var(--glow-warning); }
+  .glow-destructive { box-shadow: var(--glow-destructive); }
+
+  /* Typography */
+  .data-value {
+    @apply font-mono text-2xl font-medium tracking-tight;
+  }
+  .data-label {
+    @apply text-xs font-medium uppercase tracking-widest text-muted-foreground;
+  }
+  .status-dot {
+    @apply h-2.5 w-2.5 rounded-full;
+  }
+
+  /* Industrial card hover */
+  .industrial-card {
+    @apply rounded-xl border border-border bg-card transition-all duration-200;
+  }
+  .industrial-card:hover {
+    @apply border-primary/20;
+    box-shadow: 0 0 0 1px hsl(160 84% 39% / 0.1), 0 4px 24px hsl(160 84% 39% / 0.06);
+  }
+
+  /* Animated scan line for header */
+  .scan-line {
+    position: relative;
+    overflow: hidden;
+  }
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(160 84% 39% / 0.06), transparent);
+    animation: scan 4s linear infinite;
+  }
+
+  /* Pulse ring for critical alerts */
+  .pulse-ring {
+    position: relative;
+  }
+  .pulse-ring::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    border: 1px solid hsl(0 72% 51% / 0.4);
+    animation: ring-pulse 2s ease-out infinite;
+  }
+}
+
+@keyframes scan {
+  0%   { left: -60%; }
+  100% { left: 160%; }
+}
+
+@keyframes ring-pulse {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.08); }
+}
