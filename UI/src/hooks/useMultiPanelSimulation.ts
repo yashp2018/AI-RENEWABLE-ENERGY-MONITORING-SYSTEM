@@ -55,7 +55,7 @@ export interface PanelState {
 
 const SPEED_MAP: Record<number, number> = { 1: 2000, 2: 1000, 5: 500 };
 const MAX_CHART_POINTS = 30;
-const API_URL = "http://localhost:5000/api/data";
+const API_URL = `${(import.meta.env.VITE_API_URL as string) || "http://localhost:5000/api"}/data`;
 const CRITICAL_HITS_TO_SUSPEND = 4; // 4 consecutive critical readings → auto-suspend
 
 const defaultPanels: PanelState[] = [

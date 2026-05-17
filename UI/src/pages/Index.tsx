@@ -115,12 +115,14 @@ const Index = () => {
   // Panel name map for components
   const panelNames = Object.fromEntries(panels.map((p) => [p.id, p.name]));
 
+  const API_BASE = (import.meta.env.VITE_API_URL as string) || "http://localhost:5000/api";
+
   const handleReset = async () => {
     setResetting(true);
     stop();
     reset();
     try {
-      await fetch("http://localhost:5000/api/reset", { method: "POST" });
+      await fetch(`${API_BASE}/reset`, { method: "POST" });
     } catch {
       // backend may be offline — local reset still applies
     } finally {
@@ -130,7 +132,7 @@ const Index = () => {
 
   const handleApiResume = async (panelId: string) => {
     try {
-      await fetch("http://localhost:5000/api/resume", {
+      await fetch(`${API_BASE}/resume`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ panelId }),

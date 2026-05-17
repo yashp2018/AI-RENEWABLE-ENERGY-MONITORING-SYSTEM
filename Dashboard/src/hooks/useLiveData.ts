@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:5000/api";
 const POLL_MS = 2000;
 
 export interface LivePanel {
